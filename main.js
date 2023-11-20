@@ -1,114 +1,62 @@
-/* Variables + Prompt + alert */
+//Stock de indumentaria deportiva
 
-let nombreUsuario = prompt("Por favor, ingrese su nombre").toLowerCase()
-let apellidoUsuario = prompt("Por favor, ingrese su apellido").toLowerCase()
-alert("Bienvenido " + nombreUsuario + " " + apellidoUsuario)
+const Zapatillas = function (nombre, precio, marca, stock) {
+	this.nombre = nombre
+	this.precio = precio
+    this.marca = marca
+	this.stock = stock
+}
+
+let zapas1 = new Zapatillas ("Curry SC 3Zero 3", 75000, "Under Armour", 1)
+let zapas2 = new Zapatillas ("Giannis Inmortality DH4470-400", 125000, "Nike", 1)
+let zapas3 = new Zapatillas ("Kobe Mentality Artisan Tea", 80000, "Nike", 1)
+let zapas4 = new Zapatillas ("Under armour Flow Futr X 2", 65000, "Under Armour", 1)
+let zapas5 = new Zapatillas ("Under Armour GS JET '23", 75000, "Under Armour", 1)
+
+const Camiseta = function(nombre, precio, marca, stock) {
+    this.nombre = nombre
+    this.precio = precio
+    this.marca =  marca
+    this.stock = stock
+}
+
+let camiseta1 = new Camiseta ("LeBron James Los Angeles Lakers City Edition", 65000, "Nike", 5 )
+let camiseta2 = new Camiseta ("Camiseta deportiva Kobe Bryant Los Angeles Lakers Adidas NBA", 80000, "Adidads, 1")
+
+let lista1 = [zapas1, zapas2, zapas3, zapas4, zapas5]
+let lista2 = [camiseta1, camiseta2]
 
 
+/* Busqueda y Filtrado */
 
-/* ESTRUCTURA DO-WHILE CON IF-ELSE IF  */
+function filtrado() {
+    let tipoPrenda = prompt("¿Qué tipo de prenda estás buscando? (Zapatillas/Camisetas/Buzos/Pantalones)").toLowerCase().trim();
+   
+    let listaSeleccionada;
 
-
-let legal = true
-
-do{
-    let edad = prompt("ingrese su edad")
-    if(edad == "") { 
-        console.error("no hubo ingreso de edad")
-        legal = false
+    switch(tipoPrenda) {
+        case "zapatillas":
+            listaSeleccionada = lista1;
+            break;
+        case "camisetas":
+            listaSeleccionada = lista2;
+            break;
+        default:
+            alert("No disponemos de ese tipo de prenda");
+            return;
     }
-    else if (edad === null || isNaN(parseInt(edad))) {
-        console.error("No se ingresó una edad válida");
-        legal = false;
-    }
-    else if(edad >= 18){ 
-        alert("Usted puede permanecer en el sitio")
-        console.log("El usuario es mayor de edad"),
-        legal = false
+
+    let marcaPrenda = prompt("Ingresá la marca de " + tipoPrenda + " que deseas  (Nike, Adidas, Under Armour, Puma)").toUpperCase().trim();
+    let resultado = listaSeleccionada.filter((x) => x.marca.toUpperCase().includes(marcaPrenda));
+
+    if (resultado.length > 0) {
+        alert("Mostraremos los resultados por consola")
+        console.table(resultado);
     } else {
-        let continuar = confirm("usted no es mayor de edad, desea continuar?")
-        if (!continuar){    
-            console.error("El Usuario no es mayor de edad")
-            legal = false
-        }else{
-            alert("Bienvenido"),
-            legal = false
-        }
+        alert("No disponemos " + tipoPrenda + " de la marca: " + marcaPrenda);
     }
-
-
-}
-while(legal)
-
-
-/* FUNCTION */
-
-function rendimientoSalario() {
-    let salario = parseFloat(prompt ("ingrese su salario mensual (sin puntos ni coma)"))
-    let horasPorSemana = parseFloat(prompt ("ingrese sus horas laborales por semana"))
-    let resultado = (salario / (horasPorSemana*4)).toFixed(1)
-    alert("Usted gana por hora trabajada " + resultado + "$")
 }
 
-rendimientoSalario()
-
-
-/* FOR (no sabía que hacer de ejemplo para el for y estoy ansioso por la final)*/
-
-for (let i = 1; i<8; i++){
-    if (i === 7){
-        console.log("La septima esta en camino")
-    }else
-    console.log("Boca tiene " + i + " copa Libertadores")
-}
-
-
-
-
-/* SWITCH */
-
-
-
-let MesDelAño = 11
-
-switch (MesDelAño) {
-    case 1:
-        console.log("Estamos en Enero")
-        break
-    case 2:
-        console.log("Estamos en Febrero")
-        break
-    case 3:
-        console.log("Estamos en Marzo")
-        break
-    case 4:
-        console.log("Estamos en Abril")
-        break
-    case 5:
-        console.log("Estamos en Mayo")
-        break
-    case 6:
-        console.log("Estamos en Junio")
-        break
-    case 7:
-        console.log("Estamos en Julio")
-        break
-    case 8:
-        console.log("Estamos en Agosto")
-        break
-    case 9:
-        console.log("Estamos en Septiembre")
-        break
-    case 10:
-        console.log("Estamos en Octubre")
-        break
-    case 11:
-        console.log("Estamos en Noviembre")
-        break
-    case 12:
-        console.log("Estamos en Diciembre")
-        break
-        
-}
-
+// Llama a la función 
+filtrado();
 
