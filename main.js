@@ -1,128 +1,142 @@
-//Stock de indumentaria deportiva
-
-const Zapatillas = function (nombre, precio, marca, stock) {
-    this.nombre = nombre
-    this.precio = precio
-    this.marca = marca
-    this.stock = stock
+// Función constructora para prendas (tengo unicamente zapatillas y remeras)
+function Prenda(modelo, precio, marca) {
+    return {
+        tipo: "",
+        modelo: modelo,
+        precio: precio,
+        marca: marca
+    };
 }
 
-let zapas1 = new Zapatillas("Curry SC 3Zero 3", "$75000", "Under Armour", 1)
-let zapas2 = new Zapatillas("Giannis Inmortality DH4470-400", "$125000", "Nike", 1)
-let zapas3 = new Zapatillas("Kobe Mentality Artisan Tea", "$80000", "Nike", 1)
-let zapas4 = new Zapatillas("Under armour Flow Futr X 2", "$65000", "Under Armour", 1)
-let zapas5 = new Zapatillas("Under Armour GS JET '23", "$75000", "Under Armour", 1)
+// carga de datos JSON
+async function cargarDatos(tipoPrenda, archivoJSON) {
+    try {
+        const response = await fetch(archivoJSON);
+        const data = await response.json();
 
-const Camiseta = function (nombre, precio, marca, stock) {
-    this.nombre = nombre
-    this.precio = precio
-    this.marca = marca
-    this.stock = stock
+        switch (tipoPrenda) {
+            case "zapatillas":
+                return data.zapatillas_basquet.map(({ modelo, precio, marca }) => {
+                    const zapatilla = Prenda(modelo, precio, marca);
+                    zapatilla.tipo = "zapatilla";
+                    return zapatilla;
+                });
+            case "remeras":
+                return data.remeras_deportivas.map(({ modelo, precio, marca }) => {
+                    const remera = Prenda(modelo, precio, marca);
+                    remera.tipo = "remera";
+                    return remera;
+                });
+            default:
+                return [];
+        }
+    } catch (error) {
+        console.error(`Error al cargar datos para ${tipoPrenda}: ${error.message}`);
+        return [];
+    }
 }
+// datos zapatillas
+cargarDatos("zapatillas", "zapatillas.json")
+    .then(data => lista1.push(...data))
+    .catch(error => console.error(`Error al cargar datos de zapatillas: ${error.message}`));
 
-let camiseta1 = new Camiseta("LeBron James Los Angeles Lakers City Edition", "$65000", "Nike", 5)
-let camiseta2 = new Camiseta("Camiseta deportiva Kobe Bryant Los Angeles Lakers Adidas NBA", "$80000", "Adidas", 1)
+// datos remeras
+cargarDatos("remeras", "remeras.json")
+    .then(data => lista2.push(...data))
+    .catch(error => console.error(`Error al cargar datos de remeras: ${error.message}`));
 
-let lista1 = [zapas1, zapas2, zapas3, zapas4, zapas5]
-let lista2 = [camiseta1, camiseta2]
 
+// Función de búsqueda
+function buscar(lista, marcaPrenda) {
+    return lista.filter(prenda => prenda.marca.toLowerCase().includes(marcaPrenda.toLowerCase()));
+}
 
 /* Busqueda y Filtrado */
 
 function filtrado() {
-
-    let resultadoMostrar = document.getElementById("resultado")
-
+    let resultadoMostrar = document.getElementById("resultado");
     resultadoMostrar.innerHTML = "";
 
-    document.getElementById("boton").addEventListener("click", function () {
-
+    document.getElementById("boton").addEventListener("click", async function () {
         resultadoMostrar.innerHTML = "";
-
         let tipoPrenda = document.getElementById("buscadorPrendas").value.toLowerCase().trim();
 
         if (tipoPrenda === "") {
-            document.getElementById("contenido").innerHTML = "Por favor ingrese una prenda válida"
-            return
+            document.getElementById("contenido").innerHTML = "Por favor ingrese una prenda válida";
+            return;
         }
 
-        let listaSeleccionada;
+        let listaSeleccionada = await cargarDatos(tipoPrenda, `${tipoPrenda}.json`);
 
-        switch (tipoPrenda) {
-            case "zapatillas":
-                listaSeleccionada = lista1;
-                break;
-            case "camisetas", "remeras":
-                listaSeleccionada = lista2;
-                break;
-            default:
-                document.getElementById("contenido").innerHTML = "No disponemos de ese tipo de prenda";
-                return;
+        if (listaSeleccionada.length === 0) {
+            document.getElementById("contenido").innerHTML = "No disponemos de ese tipo de prenda";
+            return;
         }
 
         /* localStorage */
-
-        localStorage.setItem("tipoPrenda", tipoPrenda)
+        localStorage.setItem("tipoPrenda", tipoPrenda);
 
         /* segundo input */
-
-        let inputDivExiste = document.getElementById("inputDiv")    /* tuve que hacer esto pq se me creaba muchas veces el input si apretaba reiteradas veces el boton */
+        let inputDivExiste = document.getElementById("inputDiv");
 
         if (!inputDivExiste) {
-            let input = document.createElement("input")
-            input.setAttribute("type", "text")
-            input.classList.add("buscador")
-            input.setAttribute("id", "marcaPrenda")
-            input.setAttribute("placeholder", "Ingrese la marca que busca")
+            let containerDiv = document.createElement("div");
+            containerDiv.classList.add("container");
 
-            let botonDiv = document.createElement("button")
-            botonDiv.setAttribute("id", "marcaBoton")
-            botonDiv.classList.add("boton")
-            botonDiv.innerHTML = "Continuar"
+            let input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.classList.add("buscador");
+            input.setAttribute("id", "marcaPrenda");
+            input.setAttribute("placeholder", "Ingrese la marca que busca");
+
+            let botonDiv = document.createElement("button");
+            botonDiv.setAttribute("id", "marcaBoton");
+            botonDiv.classList.add("boton");
+            botonDiv.innerHTML = "Continuar";
 
             let inputDiv = document.createElement("div");
             inputDiv.setAttribute("id", "inputDiv");
-            inputDiv.classList.add("container")
+            inputDiv.classList.add("container");
             inputDiv.appendChild(input);
             inputDiv.appendChild(botonDiv);
 
-            document.body.appendChild(inputDiv)
-
+            document.body.appendChild(inputDiv);
 
             botonDiv.addEventListener("click", function () {
-
-                let marcaPrenda = document.getElementById("marcaPrenda").value.toLowerCase().trim()
-                let resultado = listaSeleccionada.filter((x) => x.marca.toLowerCase().includes(marcaPrenda));
-                let resultadoMostrar = document.getElementById("resultado")
-
-                resultadoMostrar.innerHTML = ""
-
-                if (resultado.length > 0) {
-                    resultadoMostrar.innerHTML = "<p>Resultados de la búsqueda: </p>"
-                    resultado.forEach((prenda) => {
-                        resultadoMostrar.innerHTML += `<p>${prenda.nombre}, ${prenda.marca}, ${prenda.precio}</p>`
-                    });
-                } else {
-                    resultadoMostrar.innerHTML = `<p>No hay resultados para mostrar</p>`;
-                }
-
-
-                localStorage.setItem("resultados", JSON.stringify(resultado));
-
-                document.getElementById("buscadorPrendas").value = "";
-
-                document.body.removeChild(inputDiv);
-            })
+                let marcaPrenda = document.getElementById("marcaPrenda").value.toLowerCase().trim();
+                let resultados = buscar(listaSeleccionada, marcaPrenda);
+                mostrarResultados(resultados, resultadoMostrar);
+            });
         }
+    });
+}
+
+//  mostrar los resultados
+function mostrarResultados(resultados, resultadoMostrar) {
+    resultadoMostrar.innerHTML = "";
+
+    if (resultados.length > 0) {
+        Swal.fire({
+            title: "Resultados de la búsqueda",
+            html: resultados.map(prenda => `<p>${prenda.modelo}, ${prenda.marca}, ${prenda.precio}</p>`).join(''),
+            icon: "success"
+        });
+    } else {
+        Swal.fire({
+            title: "No hay resultados para mostrar",
+            icon: "info"
+        });
     }
 
-    )
+    localStorage.setItem("resultados", JSON.stringify(resultados));
+    document.getElementById("buscadorPrendas").value = "";
+    document.body.removeChild(document.getElementById("inputDiv"));
 }
 
 // Llama a la función 
 filtrado();
 
-// Recuperar info del localStorage
+// Recuperar info del localStorage y mostrar resultados al cargar la página
 window.onload = function () {
     let tipoPrendaGuardado = localStorage.getItem("tipoPrenda");
     if (tipoPrendaGuardado) {
@@ -134,10 +148,13 @@ window.onload = function () {
         let resultadosGuardados = localStorage.getItem("resultados");
         if (resultadosGuardados) {
             let resultadosParseados = JSON.parse(resultadosGuardados);
-            resultadosParseados.forEach((prenda) => {
-                resultadoMostrar.innerHTML += `<p>${prenda.nombre}, ${prenda.marca}, ${prenda.precio}</p>`;
-            });
+            mostrarResultados(resultadosParseados, document.getElementById("resultado"));
         }
     }
 }
 
+
+
+// consumo de datos de un JSON local
+//manejo de promesas con fetch , then y catch
+// uso de sweetAlert en los resultados

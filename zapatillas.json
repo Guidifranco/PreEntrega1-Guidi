@@ -1,0 +1,65 @@
+{
+    "zapatillas_basquet": [
+      {
+        "marca": "Nike",
+        "modelo": "LeBron 18",
+        "precio": "$200.000"
+      },
+      {
+        "marca": "Adidas",
+        "modelo": "Dame 7",
+        "precio": "$150.000"
+      },
+      {
+        "marca": "Under Armour",
+        "modelo": "Curry 8",
+        "precio": "$180.000"
+      },
+      {
+        "marca": "Jordan",
+        "modelo": "Air Jordan XXXV",
+        "precio": "$220.000"
+      },
+      {
+        "marca": "Nike",
+        "modelo": "KD 14",
+        "precio": "$190.000"
+      },
+      {
+        "marca": "Adidas",
+        "modelo": "Harden Vol. 5",
+        "precio": "$160.000"
+      },
+      {
+        "marca": "Under Armour",
+        "modelo": "Anatomix Spawn 2",
+        "precio": "$170.000"
+      },
+      {
+        "marca": "Jordan",
+        "modelo": "Why Not Zer0.4",
+        "precio": "$200.000"
+      },
+      {
+        "marca": "Nike",
+        "modelo": "Zoom Freak 3",
+        "precio": "$180.000"
+      },
+      {
+        "marca": "Adidas",
+        "modelo": "Pro Boost Low",
+        "precio": "$140.000"
+      },
+      {
+        "marca": "Under Armour",
+        "modelo": "Embiid 1",
+        "precio": "$190.000"
+      },
+      {
+        "marca": "Jordan",
+        "modelo": "Melo M13",
+        "precio": "$170.000"
+      }
+    ]
+  }
+  

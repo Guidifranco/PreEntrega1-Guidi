@@ -1,0 +1,100 @@
+{
+    "remeras_deportivas": [
+      {
+        "marca": "Nike",
+        "modelo": "Dri-FIT Victory",
+        "precio": "$35.000"
+      },
+      {
+        "marca": "Adidas",
+        "modelo": "Alphaskin Sport",
+        "precio": "$30.000"
+      },
+      {
+        "marca": "Puma",
+        "modelo": "Essentials Logo",
+        "precio": "$25.000"
+      },
+      {
+        "marca": "Under Armour",
+        "modelo": "Tech Twist V-Neck",
+        "precio": "$28.000"
+      },
+      {
+        "marca": "Reebok",
+        "modelo": "CrossFit ACTIVCHILL",
+        "precio": "$14.000"
+      },
+      {
+        "marca": "New Balance",
+        "modelo": "Accelerate Short Sleeve",
+        "precio": "$22.000"
+      },
+      {
+        "marca": "Asics",
+        "modelo": "Lite-Show Short Sleeve",
+        "precio": "$32.000"
+      },
+      {
+        "marca": "Columbia",
+        "modelo": "Silver Ridge 2.0",
+        "precio": "$45.000"
+      },
+      {
+        "marca": "Nike",
+        "modelo": "Pro Combat Hypercool",
+        "precio": "$38.000"
+      },
+      {
+        "marca": "Adidas",
+        "modelo": "Response Long Sleeve",
+        "precio": "$27.000"
+      },
+      {
+        "marca": "Puma",
+        "modelo": "Active Dry Core",
+        "precio": "$23.000"
+      },
+      {
+        "marca": "Under Armour",
+        "modelo": "Rush Seamless",
+        "precio": "$33.000"
+      },
+      {
+        "marca": "Reebok",
+        "modelo": "United By Fitness",
+        "precio": "$42.000"
+      },
+      {
+        "marca": "New Balance",
+        "modelo": "Q Speed Fuel Jacquard",
+        "precio": "$28.000"
+      },
+      {
+        "marca": "Asics",
+        "modelo": "Silver Short Sleeve",
+        "precio": "$30.000"
+      },
+      {
+        "marca": "Columbia",
+        "modelo": "Zero Rules Short Sleeve",
+        "precio": "$35.000"
+      },
+      {
+        "marca": "Nike",
+        "modelo": "Miler Short Sleeve",
+        "precio": "$25.000"
+      },
+      {
+        "marca": "Adidas",
+        "modelo": "Own The Run",
+        "precio": "$31.000"
+      },
+      {
+        "marca": "Under Armour",
+        "modelo": "Qualifier Iso-Chill",
+        "precio": "$37.000"
+      }
+    ]
+  }
+  

@@ -1,28 +1,65 @@
-*{
+* {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
-.tituloPrincipal{
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; 
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tituloPrincipal {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 25px;
+    color: #3498db;
 }
 
-.buscador{
+.buscador, .buscador-marcas {
     margin-bottom: 10px;
-    border-radius: 2px;
-
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
 }
 
-.boton{
+.boton, #marcaBoton {
     margin-bottom: 10px;
     margin-left: 5px;
-    background-color:grey;
+    background-color: #3498db; 
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    color: #fff; 
 }
 
-.container{
+.boton:hover, #marcaBoton:hover {
+    background-color: #2980b9; /* Cambia el color al pasar el ratón sobre el botón */
+}
+
+#contenido, #resultado, #inputDivMarcas {
+    margin-top: 20px;
+    width: calc(100% - 20px);
+}
+
+
+.container {
     text-align: center;
 }
